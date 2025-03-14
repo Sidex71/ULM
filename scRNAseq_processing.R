@@ -50,17 +50,9 @@ png("/mnt/8TB/users/shameed/shameed/Doublet predictions/figures/UMAP_invitro.png
 p1
 dev.off()
 
-Idents(invitro_obj) <- invitro_obj$sorting_scheme
-marker_sub <- c('Cd3d', 'Cd3e', 'Cd3g','Cd4', 'Trac') 
-p1 <-DoHeatmap(invitro_obj, features = marker_sub, slot = 'data')
-p1
-png("/mnt/8TB/users/shameed/shameed/Doublet predictions/figures/T_markers_heatmap.png", width = 10, height = 6.5, units = 'in', res = 600)
-p1
-dev.off()
-
-marker_sub <- c("Cd80", 'Cd83', 'Cd80', "Clec7a", "Cd86", "H2-DMb2", "H2-Aa", "H2-Ab1", "H2-Eb1")
-p1 <-DoHeatmap(invitro_obj, features = marker_sub, slot = 'data')
-png("/mnt/8TB/users/shameed/shameed/Doublet predictions/figures/DC_markers_heatmap.png", width = 12, height = 7.5, units = 'in', res = 600)
+Markers <- c('Cd3d', 'Cd3e', 'Cd3g','Cd4', 'Trac','Cd80', 'Cd83', 'Clec7a', 'Cd86', 'H2-DMb2', 'H2-Aa', 'H2-Ab1', 'H2-Eb1')
+p1 <-DoHeatmap(invitro_obj, features = Markers, slot = 'data', label = F)
+png("/mnt/8TB/users/shameed/shameed/Doublet predictions/figures/DC_T_heatmap.png", width = 8, height = 5.5, units = 'in', res = 600)
 p1
 dev.off()
 
@@ -86,7 +78,14 @@ PairedData$CellType <- 'Hep_Endo'
 PairedData[['RNA3']]<- as(object = PairedData[["RNA"]], Class = "Assay")
 VlnPlot(PairedData, features = c('Cyp2e1','Apoa1',  'Krt18', 'Oit3', 'Dpp4', 'Fcgr2b'), raster = F)
 #saveRDS(PairedData, 'PairedData.rds')
-
+###########
+Markers <-c('Ahr', 'Cps1', 'Gls2','Ass1', 'Fcna','Apoa1','Hhex','Gck', 'Cyp7a1','Glul','Fcgr2b', 'C1qtnf1', 'Flt4', 'Fabp4','Icam1','Cldn1')
+PairedData$CellType <- 'Hepatocyte_Endothelial'
+p1<-DoHeatmap(PairedData, features = Markers, group.by = 'CellType', label = F)
+png("/mnt/8TB/users/shameed/shameed/Doublet predictions/figures/hepEndo_heatmap.png", width = 8, height = 5.5, units = 'in', res = 600)
+p1
+dev.off()
+#############
 Liver <- read_table("/mnt/Data/shameed/Doublet predictions/liver/GSE166504_cell_raw_counts.20220204.txt")
 liver_meta <- read_tsv("/mnt/Data/shameed/Doublet predictions/liver/GSE166504_cell_metadata.20220204.tsv")
 rownames(liver_meta) <- paste0(liver_meta$FileName, '_', liver_meta$CellID)
