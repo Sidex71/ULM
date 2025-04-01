@@ -386,11 +386,12 @@ saveRDS(confmat_all, 'confmat_all.rds')
 
 colnames(confmat_all)[5] <- '% doublet detected'
 confmat_all$Method <- str_replace(confmat_all$Method, 'ulm', 'ULM')
+
 data <- confmat_all %>% filter(Tissue=='in vitro') %>% 
   dplyr:: select(c(Method, Sensitivity, Specificity, `% doublet detected`, Tissue)) %>%
   pivot_longer(cols = -c(Method, Tissue), names_to = 'metrics', values_to = 'percentage') %>%
   mutate(percentage = percentage * 100)
-
+#data <- data %>% filter(!Method %in% c('Marker', 'AUC'))
 p1<- ggplot(data, aes(x = metrics, y = percentage, fill = Method)) +
   geom_bar(stat = "identity", position = position_dodge(width = 0.8), width = 0.5) +  # Bar position dodge width should match text
   geom_text(aes(label = round(percentage, 1)), 
@@ -417,7 +418,8 @@ data <- confmat_all %>% filter(Tissue=='in vivo') %>%
   pivot_longer(cols = -c(Method, Tissue), names_to = 'metrics', values_to = 'percentage') %>%
   mutate(percentage = percentage * 100)
 
-p1<- ggplot(data, aes(x = metrics, y = percentage, fill = Method)) +
+#data <- data %>% filter(!Method %in% c('Marker', 'AUC'))
+p2<- ggplot(data, aes(x = metrics, y = percentage, fill = Method)) +
   geom_bar(stat = "identity", position = position_dodge(width = 0.8), width = 0.5) +  # Bar position dodge width should match text
   geom_text(aes(label = round(percentage, 1)), 
             position = position_dodge(width = 0.8),  # Ensure the same width in dodge for text
@@ -435,9 +437,16 @@ p1<- ggplot(data, aes(x = metrics, y = percentage, fill = Method)) +
 
 #dir.create('plots')
 png("/mnt/8TB/users/shameed/shameed/Doublet predictions/figures/stat_invivo.png", width = 15, height = 10.5, units = 'in', res = 600)
-p1
+p2
 dev.off()
 
+library(ggpubr)
+align_fig <-ggarrange(p1, p2, ncol = 2, nrow=1, common.legend = T, legend="right")
+print(align_fig)
+
+png("/mnt/8TB/users/shameed/shameed/Doublet predictions/figures/stat_DC_T.png", width = 22, height = 10.5, units = 'in', res = 600)
+align_fig
+dev.off()
 ############################################Hepatocyte-endothelial
 neigb_det <- table(PairedData$neigb)[1]
 CICADA_det <- table(PairedData$Cicada)[2]
@@ -461,11 +470,11 @@ p1<-ggplot(data, aes(x = Method, y = `% doublet detected`, fill = Method)) +
   theme_minimal() +
   theme(axis.text.x = element_text(size=18, hjust = 0.5, face = 'bold'),
         axis.text.y = element_text(size = 18, hjust = 0.5, face = 'bold'),
-        legend.text = element_text(size = 17, hjust = 0.5, face = 'bold'),
-        legend.key.size = unit(1.5, "cm"),
-        legend.title = element_text(size = 17, hjust = 0.5, face = 'bold'),
+        #legend.text = element_text(size = 17, hjust = 0.5, face = 'bold'),
+        #legend.key.size = unit(1.5, "cm"),
+        #legend.title = element_text(size = 17, hjust = 0.5, face = 'bold'),
         axis.title.y = element_text(size = 20, hjust = 0.5, face = 'bold'),
-        plot.title = element_text(size = 25, hjust = 0.5, face = 'bold')) +
+        plot.title = element_text(size = 25, hjust = 0.5, face = 'bold')) + NoLegend() +
   scale_fill_discrete(name= 'Method')
 
 #dir.create('plots')

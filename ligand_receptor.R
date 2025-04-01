@@ -56,7 +56,7 @@ saveRDS(LRP_enriched, 'LRP_enriched.rds')
 LRP_filt <-LRP_filt[order(LRP_filt$percent, decreasing = T),]
 LRP_filt <- LRP_filt %>% rownames_to_column('LRP')
 saveRDS(LRP_filt, 'LRP_filt.rds')
-p1<-ggplot(LRP_filt[1:50,], aes(x=LRP, y=percent, fill = LRP)) + 
+p1<-ggplot(LRP_filt[1:50,], aes(x=LRP, y=percent)) + 
   geom_bar(stat = 'identity') + 
   labs(title = ' ',
        y= 'cell proportion (%)', x=NULL)+
@@ -142,7 +142,7 @@ Spa_LRdf_final <-Spa_LRdf_final[order(Spa_LRdf_final$final_percent, decreasing =
 
 saveRDS(Spa_LRdf_final, 'Spa_LRdf_final.rds')
 
-p1<-ggplot(Spa_LRdf_final[1:50,], aes(x=LRP, y=final_percent, fill = LRP)) + 
+p1<-ggplot(Spa_LRdf_final[1:50,], aes(x=LRP, y=final_percent)) + 
   geom_bar(stat = 'identity') + 
   labs(title = ' ',
        y= 'spot proportion (%)', x=NULL)+
