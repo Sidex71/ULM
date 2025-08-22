@@ -368,7 +368,7 @@ conf_df<- as.data.frame(conf_df)
 conf_df$Method <- my_meth
 conf_df$Tissue <- 'in vitro'
 conf_df <- conf_df[, c('Tissue','Method', 'Sensitivity', "Specificity",  "Pos Pred Value", "Neg Pred Value")]
-
+colnames(conf_df) <- c('Tissue','Method', 'Precision', "Neg pred",  "Sensitivity", "Specificity")
 inv_df <- rbind(confmat_Cicada_invivo$byClass[1:4], 
                 confmat_invivo_neigb$byClass[1:4],
                 confmat_invivo_ulm$byClass[1:4])
@@ -377,22 +377,23 @@ inv_df<- as.data.frame(inv_df)
 inv_df$Method <- my_meth
 inv_df$Tissue <- 'in vivo'
 inv_df <- inv_df[, c('Tissue','Method', 'Sensitivity', "Specificity",  "Pos Pred Value", "Neg Pred Value")]
+colnames(inv_df) <- c('Tissue','Method', 'Precision', "Neg pred",  "Sensitivity", "Specificity")
 
 confmat_all <- rbind(conf_df, inv_df)
 confmat_all$Overall_accuracy <- (confmat_all$Sensitivity + confmat_all$Specificity)/2
-saveRDS(confmat_all, 'confmat_all.rds')
+saveRDS(confmat_all, '/mnt/8TB/users/shameed/shameed/Doublet predictions/confmat_all.rds')
 
 #############plot
 
-colnames(confmat_all)[5] <- '% doublet detected'
+#colnames(confmat_all)[5] <- '% doublet detected'
 confmat_all$Method <- str_replace(confmat_all$Method, 'ulm', 'ULM')
 
 data <- confmat_all %>% filter(Tissue=='in vitro') %>% 
-  dplyr:: select(c(Method, Sensitivity, Specificity, `% doublet detected`, Tissue)) %>%
+  dplyr:: select(c(Method, Sensitivity, Specificity, Precision, Tissue)) %>%
   pivot_longer(cols = -c(Method, Tissue), names_to = 'metrics', values_to = 'percentage') %>%
   mutate(percentage = percentage * 100)
 #data <- data %>% filter(!Method %in% c('Marker', 'AUC'))
-p1<- ggplot(data, aes(x = metrics, y = percentage, fill = Method)) +
+p1<- ggplot(data, aes(x =factor(metrics, levels = c('Sensitivity', 'Precision', 'Specificity')), y = percentage, fill = Method)) +
   geom_bar(stat = "identity", position = position_dodge(width = 0.8), width = 0.5) +  # Bar position dodge width should match text
   geom_text(aes(label = round(percentage, 1)), 
             position = position_dodge(width = 0.8),  # Ensure the same width in dodge for text
@@ -412,14 +413,13 @@ p1<- ggplot(data, aes(x = metrics, y = percentage, fill = Method)) +
 png("/mnt/8TB/users/shameed/shameed/Doublet predictions/figures/stat_invitro.png", width = 15, height = 10.5, units = 'in', res = 600)
 p1
 dev.off()
-###########
+########################
 data <- confmat_all %>% filter(Tissue=='in vivo') %>% 
-  dplyr:: select(c(Method, Sensitivity, Specificity, `% doublet detected`, Tissue)) %>%
+  dplyr:: select(c(Method, Sensitivity, Specificity, Precision, Tissue)) %>%
   pivot_longer(cols = -c(Method, Tissue), names_to = 'metrics', values_to = 'percentage') %>%
   mutate(percentage = percentage * 100)
-
 #data <- data %>% filter(!Method %in% c('Marker', 'AUC'))
-p2<- ggplot(data, aes(x = metrics, y = percentage, fill = Method)) +
+p2<- ggplot(data, aes(x =factor(metrics, levels = c('Sensitivity', 'Precision', 'Specificity')), y = percentage, fill = Method)) +
   geom_bar(stat = "identity", position = position_dodge(width = 0.8), width = 0.5) +  # Bar position dodge width should match text
   geom_text(aes(label = round(percentage, 1)), 
             position = position_dodge(width = 0.8),  # Ensure the same width in dodge for text
