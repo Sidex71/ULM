@@ -1,0 +1,34 @@
+Package: ULM
+Type: Package
+Title: Inferring Physical Cell-cell Interaction Networks from ScRNAseq Data
+Version: 0.1.0
+Depends: R (>= 4.2.0), stats, utils
+Authors@R: 
+          c(person("Sodiq A.", "Hameed", , "hameedsodiq71@gmail.com", role = c("aut", "cre"),
+                    comment = c(ORCID = "0000-0002-1539-8088")),
+            person("Luis F.", "Iglesias-Martinez", role = "aut"),
+            person("Walter", "Kolch", role = "aut"),
+            person("Vadim", "Zhernovkov", role = "aut"))
+Description: A novel approach to depict physical cell-cell interactions from scRNAseq datasets using cell type-specifc gene signatures.
+             This method utilizes univariate linear models to identify and predict the cellular composition of multiplets in scRNAseq by assigning signature scores to cellular barcodes. 
+License: GPL (>= 3)
+Encoding: UTF-8
+LazyData: true
+Imports: 
+        Seurat (>= 3.0.0), 
+        decoupleR, 
+        tidyverse, 
+        dplyr, 
+        stringr, 
+        igraph, 
+        ggraph, 
+        tidygraph, 
+        ggplot2,
+        magrittr,
+        tibble
+RoxygenNote: 7.3.2
+Suggests: 
+       rmarkdown,
+       knitr,
+VignetteBuilder: knitr
+URL:  https://github.com/Sidex71/PhD-Scripts/ULM
