@@ -55,6 +55,7 @@ PlotNetwork <- function(network_df, node_size = 20, node_color = 'blue',
            edge_color = edge_color)
 
   # Create the network plot using ggraph
+  set.seed(837100)
   net_plot <- ggraph(tg, layout = network_layout) +
     geom_edge_link(aes(width = edge_width), color = edge_color, show.legend = TRUE) +
     geom_node_point(aes(size = node_size), color = node_color, show.legend = FALSE) +
