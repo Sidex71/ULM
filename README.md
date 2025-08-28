@@ -18,6 +18,10 @@ as singlets or multiplets based on their signature scores. Multiplets
 are those barcodes or cells that are enriched in two or more cell
 type-specific gene signatures.
 
+<img
+src="/mnt/8TB/users/shameed/shameed/Doublet%20predictions/scripts/ULM/man/figures/algorithm.jpeg"
+style="width:100.0%" />
+
 ## Installation
 
 You can install the development version of ULM from
@@ -39,7 +43,7 @@ interaction network from a scRNAseq data:
 
 ``` r
 library(ULM)
-data("int_singData")
+data("int_singData")  ##int_singData is a seurat object with a Cell_Type column containing cell annotations.
 set.seed(101324)
 int_sig <- ULM::GetSignature(int_singData, ident_col = int_singData$Cell_Type, n = 100)
 #> using the specified seurat ident to generate signatures
