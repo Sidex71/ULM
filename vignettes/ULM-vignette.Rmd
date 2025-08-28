@@ -65,12 +65,13 @@ Let us visualize the cell score data frame
 head(my_scores, 10)
 ```
 
-As seen, the cell score data frame contains the scores of barcodes for each cell signature as well as the p values.
+As seen, the cell score data frame contains the scores of barcodes for each cell signature as well as the p values. Positive scores infer enriched signatures while negative scores infer non-enriched signatures for each barcode.
 
 Next is to label each barcode by cell types based on the signature scores. Cells with one significant signature score will have a single-cell label while cells with more than one significant signature score will have a multi-cell label. Please note that barcodes and cells are used interchangeably.
 ```{r}
 my_ass <- GetCellAssignments(score_data = my_scores, cut_off = 1, p_val = 0.05)
 ```
+We choose a cut-off of 1 to depict enriched signatures. This means that we considered all negative scores and those below 1 as non-enriched. Ideally, all positive scores should be considered enriched but choosing a cut-off of 1 will increase precision of our cell assignment. However, users may choose to set the cut-off at 0 or higher. Note that there is a trade off between cutoff and cell dropout. 
 
 Let us visualize the cell assignment data frame.
 ```{r}
@@ -152,7 +153,7 @@ my_node_df
 ```
 
 Finally, we can plot the physical interaction network
-```{r, fig.width=12, fig.height=6, fig.align='left'}
+```{r, fig.width=8, fig.height=6, fig.align='left'}
 PlotNetwork(my_node_df)
 ```
 
@@ -179,6 +180,11 @@ Let us generate signatures from the reference dataset
 set.seed(101324)
 ref_sig <- GetSignature(ref_obj, ident_col = ref_obj$Cell_Type)
 head(ref_sig, 10)
+```
+
+NB: It is also possible to directly import and utilize a reference signature but this must be formatted to suit the output of the GetSignature() function above. That is, it must be a data frame (or tibble) with 3 columns- source, target and mor, containing the cell type, signatures and weight (=1) respectively.
+```{r}
+
 ```
 
 We then utilize the reference signature to predict multiplets in the query data set and construct a physical cell-cell interaction network.
