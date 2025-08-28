@@ -18,9 +18,7 @@ as singlets or multiplets based on their signature scores. Multiplets
 are those barcodes or cells that are enriched in two or more cell
 type-specific gene signatures.
 
-<img
-src="/mnt/8TB/users/shameed/shameed/Doublet%20predictions/scripts/ULM/man/figures/algorithm.jpeg"
-style="width:100.0%" />
+<img src="ULM/man/figures/algorithm.jpeg" style="width:100.0%" />
 
 ## Installation
 
