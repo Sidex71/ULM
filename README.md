@@ -41,7 +41,9 @@ interaction network from a scRNAseq data:
 
 ``` r
 library(ULM)
+####load dataset
 data("int_singData")  ##int_singData is a seurat object with a Cell_Type column containing cell annotations.
+##generate signatures
 set.seed(101324)
 int_sig <- ULM::GetSignature(int_singData, ident_col = int_singData$Cell_Type, n = 100)
 #> using the specified seurat ident to generate signatures
@@ -55,12 +57,18 @@ int_sig <- ULM::GetSignature(int_singData, ident_col = int_singData$Cell_Type, n
 #> Calculating cluster Paneth
 #> Calculating cluster Enteroendocrine
 #> Calculating cluster Tuft
+
+###score cells and assign labels
 my_scores <- GetCellScores(seurat_obj = int_singData, signatures = int_sig, assay = 'RNA', slot = 'data')
 my_assign <- GetCellAssignments(score_data = my_scores, cut_off = 1, p_val = 0.05)
 int_singData <- AddMetaObject(int_singData, cell_class_df = my_assign)
+
+#####filter multiplets
 my_mult_filt <- FilterMultiplet(int_singData, minCells = 2, minFreq = 10)
 #> Warning: Removing 1929 cells missing data for vars requested
 multSummaryFilt <- my_mult_filt$multSummaryFilt
+
+###plot network
 my_node_df <- GetNodeDF(mat = multSummaryFilt)
 PlotNetwork(my_node_df)
 ```
