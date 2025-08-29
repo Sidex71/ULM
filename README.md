@@ -31,7 +31,7 @@ if (!requireNamespace("devtools", quietly = TRUE)) {
 }
 library(devtools)
 
-#devtools::install_github("Sidex71/ULM")
+#devtools::install_github("Sidex71/ULM", build_vignettes = T)
 ```
 
 ## Example
@@ -42,7 +42,7 @@ interaction network from a scRNAseq data:
 ``` r
 library(ULM)
 ####load dataset
-data("int_singData")  ##int_singData is a seurat object with a Cell_Type column containing cell annotations.
+data("int_singData")  ##int_singData is a preprocessed scRNAseq seurat object with a Cell_Type column containing cell annotations.
 ##generate signatures
 set.seed(101324)
 int_sig <- ULM::GetSignature(int_singData, ident_col = int_singData$Cell_Type, n = 100)
