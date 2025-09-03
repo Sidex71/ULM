@@ -241,7 +241,7 @@ query_network_df <- GetNodeDF(mat = query_multSummaryFilt)
 
 Plotting query cell-cell interaction network
 ```{r, fig.width=15, fig.height=12, fig.align='left'}
-PlotNetwork(query_network_df)
+PlotNetwork(query_network_df, node_text_size = 10, legend_text_size = 20, legend_title_size = 20, main_size = 25)
 ```
 
 ```{r}

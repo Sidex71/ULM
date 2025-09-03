@@ -31,7 +31,7 @@ if (!requireNamespace("devtools", quietly = TRUE)) {
 }
 library(devtools)
 
-#devtools::install_github("Sidex71/ULM", build_vignettes = T)
+devtools::install_github("Sidex71/ULM", build_vignettes = T)
 ```
 
 ## Example
@@ -74,3 +74,7 @@ PlotNetwork(my_node_df)
 ```
 
 <img src="man/figures/README-example-1.png" width="100%" />
+
+A more comprehensive guide on the usage of the ULM package can be found
+in the following link
+<https://sidex71.github.io/ULM/articles/ULM-vignette.html>
