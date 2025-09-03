@@ -35,6 +35,10 @@ library(devtools)
 
 devtools::install_github("Sidex71/ULM", build_vignettes = T)
 ```
+A full guide on ULM workflow can be found on the package website https://sidex71.github.io/ULM/articles/ULM-vignette.html  or on the vignettes page 
+```{r}
+browseVignettes('ULM')
+```
 
 ## Example
 
