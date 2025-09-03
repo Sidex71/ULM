@@ -31,4 +31,4 @@ Suggests:
        rmarkdown,
        knitr,
 VignetteBuilder: knitr
-URL:  https://github.com/Sidex71/ULM
+URL: https://github.com/Sidex71/ULM, https://sidex71.github.io/ULM/
