@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
 Introduction
 ULM is a package to reconstruct physical cell-cell interaction networks from conventional scRNAseq datasets using signature-based approach. Basically, ULM utilises univariate linear models to identify multiplets (mostly doublets) which potentially represent undissociated cell fractions that are physically connected cell neighbors in tissue. 
 
-![](/mnt/8TB/users/shameed/shameed/Doublet predictions/scripts/ULM/man/figures/algorithm.jpeg){width=100%}
+![](/mnt/8TB/users/shameed/shameed/scripts/package_figure/algorithm.jpeg){width=100%}
 
 
 We first load the ULM package
