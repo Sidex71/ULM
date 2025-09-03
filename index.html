@@ -70,12 +70,16 @@
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://devtools.r-lib.org/" class="external-link">devtools</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"Sidex71/ULM"</span>, build_vignettes <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span></code></pre></div>
+<p>A full guide on ULM workflow can be found on the package website <a href="https://sidex71.github.io/ULM/articles/ULM-vignette.html" class="uri">https://sidex71.github.io/ULM/articles/ULM-vignette.html</a> or on the vignettes page</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/browseVignettes.html" class="external-link">browseVignettes</a></span><span class="op">(</span><span class="st">'ULM'</span><span class="op">)</span></span>
+<span><span class="co">#&gt; starting httpd help server ... done</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
 </h2>
 <p>This is a quick example which shows how to infer physical cell-cell interaction network from a scRNAseq data:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/Sidex71/ULM" class="external-link">ULM</a></span><span class="op">)</span></span>
 <span><span class="co">####load dataset</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"int_singData"</span><span class="op">)</span>  <span class="co">##int_singData is a preprocessed scRNAseq seurat object with a Cell_Type column containing cell annotations.</span></span>
