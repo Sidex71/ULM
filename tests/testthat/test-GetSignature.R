@@ -25,4 +25,6 @@ test_that("GetSignature generates signatures correctly", {
   # check that the number of genes in each cell type signature is ≤ n
   cluster_counts <- table(int_sig$source)
   expect_true(all(cluster_counts <= 100))
+  
 })
+
