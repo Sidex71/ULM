@@ -10,7 +10,7 @@ test_that("FilterMultiplet filters multiplets correctly", {
     seurat_obj = int_multData[, 1:200],   # keep smaller subset for speed
     signatures = int_signature,
     assay = "RNA",
-    slot = "data"
+    layer = "data"
   )
   
   # assign cells

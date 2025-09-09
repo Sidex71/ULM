@@ -37,7 +37,7 @@ GetCellScores <- function(seurat_obj, signatures, assay = 'RNA', slot = NULL, la
   else {
     mat <- GetAssayData(seurat_obj, assay = assay, layer = layer)
   } 
-
+  
   
   # Score cells using Univariate Linear Models
   acts <- run_ulm(mat = mat, net = signatures, .source = "source", .target = "target", .mor = "mor", minsize = 5)
