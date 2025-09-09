@@ -17,7 +17,7 @@
 #'                            slot = 'data')
 #' head(my_scores)
 #'
-#' @importFrom Seurat GetAssayData Layers
+#' @importFrom Seurat GetAssayData 
 #' @importFrom decoupleR run_ulm
 #' @export
 #'
@@ -35,7 +35,7 @@ GetCellScores <- function(seurat_obj, signatures, assay = 'RNA', slot = NULL, la
     mat <- GetAssayData(seurat_obj, assay = assay, slot = slot)
   } 
   else {
-    mat <- Layers(seurat_obj, assay = assay, layer = layer)
+    mat <- GetAssayData(seurat_obj, assay = assay, layer = layer)
   } 
 
   
