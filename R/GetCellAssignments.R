@@ -8,7 +8,7 @@
 #' @examples
 #' data(int_singData)
 #' data(int_signature)
-#' my_scores <- GetCellScores(seurat_obj = int_singData[,1:1000], signatures = int_signature, assay = 'RNA', slot = 'data')
+#' my_scores <- GetCellScores(seurat_obj = int_singData[,1:1000], signatures = int_signature, assay = 'RNA', layer = 'data')
 #' my_ass <- GetCellAssignments(score_data = my_scores)
 #' head(my_ass)
 #'

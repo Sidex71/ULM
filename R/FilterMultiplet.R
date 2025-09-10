@@ -9,7 +9,7 @@
 #'
 #' data(int_multData)
 #' data(int_signature)
-#' my_scores <- GetCellScores(seurat_obj = int_multData[,1:1000], signatures = int_signature, assay = 'RNA', slot = 'data')
+#' my_scores <- GetCellScores(seurat_obj = int_multData[,1:1000], signatures = int_signature, assay = 'RNA', layer = 'data')
 #' my_ass <- GetCellAssignments(score_data = my_scores)
 #' new_obj <- AddMetaObject(seurat_obj = int_multData[,1:1000], cell_class_df = my_ass)
 #' my_mult <- GetMultiplet(seurat_obj = new_obj)

@@ -36,11 +36,11 @@ devtools::install_github("Sidex71/ULM", build_vignettes = T)
 
 A full guide on ULM workflow can be found on the package website
 <https://sidex71.github.io/ULM/articles/ULM-vignette.html> or on the
-vignettes page
+vignettes page by running
 
 ``` r
-browseVignettes('ULM')
-#> starting httpd help server ... done
+browseVignettes('ULM') 
+#> No vignettes found by browseVignettes("ULM")
 ```
 
 ## Example
@@ -68,7 +68,7 @@ int_sig <- ULM::GetSignature(int_singData, ident_col = int_singData$Cell_Type, n
 #> Calculating cluster Tuft
 
 ###score cells and assign labels
-my_scores <- GetCellScores(seurat_obj = int_singData, signatures = int_sig, assay = 'RNA', slot = 'data')
+my_scores <- GetCellScores(seurat_obj = int_singData, signatures = int_sig, assay = 'RNA', layer  = 'data')
 my_assign <- GetCellAssignments(score_data = my_scores, cut_off = 1, p_val = 0.05)
 int_singData <- AddMetaObject(int_singData, cell_class_df = my_assign)
 

@@ -4,7 +4,13 @@
 \alias{GetCellScores}
 \title{scoring cells for gene signatures}
 \usage{
-GetCellScores(seurat_obj, signatures, assay = "RNA", slot = NULL, layer = NULL)
+GetCellScores(
+  seurat_obj,
+  signatures,
+  assay = "RNA",
+  slot = NULL,
+  layer = "data"
+)
 }
 \arguments{
 \item{seurat_obj}{a preprocessed Seurat object storing the scRNAseq data}
@@ -13,9 +19,7 @@ GetCellScores(seurat_obj, signatures, assay = "RNA", slot = NULL, layer = NULL)
 
 \item{assay}{a character specifying assay in the Seurat object containing count matrix.}
 
-\item{slot}{a character specifying the slot to draw counts from. This can be 'counts' for raw counts, 'data' for normalized counts, or 'scaled' for scaled counts (Seurat v3/v4). Default is NULL}
-
-\item{layer}{a character specifying the layer to draw counts from (Seurat v5). Default is NULL.}
+\item{layer}{a character specifying the layer to draw counts from (Seurat v3/v4). This can be "counts" for raw counts, "data" for normalized counts, or "scaled" for scaled counts. Default is NULL.}
 }
 \value{
 a data frame of cell barcodes and gene signature scores
@@ -29,7 +33,7 @@ data(int_signature)
 my_scores <- GetCellScores(seurat_obj = int_singData[,1:1000],
                            signatures = int_signature,
                            assay = 'RNA',
-                           slot = 'data')
+                           layer = 'data')
 head(my_scores)
 
 }
