@@ -190,10 +190,14 @@ cell type, the target column contains the genes and the mor column
 contains the weights.</p>
 <p>Next, we score each cell in the scRNseq data for cell signatures by
 fitting univariate linear models. We will score the signatures on each
-barcode (cell) in the normalised gene count matrix (found in the slot =
-data). To use the raw count, set slot = ‘count’</p>
+barcode (cell) in the normalised gene count matrix, found in the layer =
+‘data’ (or slot = ‘data’, for older Seurat versions). To use the raw
+count, set layer = ‘count’ (or slot = ‘count’, for older Seurat
+versions).</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">my_scores</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/GetCellScores.html">GetCellScores</a></span><span class="op">(</span>seurat_obj <span class="op">=</span> <span class="va">int_singData</span>, signatures <span class="op">=</span> <span class="va">int_sig</span>, assay <span class="op">=</span> <span class="st">'RNA'</span>, slot <span class="op">=</span> <span class="st">'data'</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">my_scores</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/GetCellScores.html">GetCellScores</a></span><span class="op">(</span>seurat_obj <span class="op">=</span> <span class="va">int_singData</span>, signatures <span class="op">=</span> <span class="va">int_sig</span>, assay <span class="op">=</span> <span class="st">'RNA'</span>, layer  <span class="op">=</span> <span class="st">'data'</span><span class="op">)</span></span></code></pre></div>
+<p>NB: If the Seurat object is from older Seurat versions, layers would
+be absent, in this case please set layer = NULL, slot = ‘data’.</p>
 <p>Let us visualize the cell score data frame</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">my_scores</span>, <span class="fl">10</span><span class="op">)</span></span>
@@ -535,7 +539,7 @@ query data set and construct a physical cell-cell interaction
 network.</p>
 <p>Getting query cell scores</p>
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">my_scores</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/GetCellScores.html">GetCellScores</a></span><span class="op">(</span>seurat_obj <span class="op">=</span> <span class="va">query_obj</span>, signatures <span class="op">=</span> <span class="va">ref_sig</span>, assay <span class="op">=</span> <span class="st">'RNA'</span>, slot <span class="op">=</span> <span class="st">'data'</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">my_scores</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/GetCellScores.html">GetCellScores</a></span><span class="op">(</span>seurat_obj <span class="op">=</span> <span class="va">query_obj</span>, signatures <span class="op">=</span> <span class="va">ref_sig</span>, assay <span class="op">=</span> <span class="st">'RNA'</span>, layer <span class="op">=</span> <span class="st">'data'</span><span class="op">)</span></span></code></pre></div>
 <p>Assigning cell labels</p>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">my_ass</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/GetCellAssignments.html">GetCellAssignments</a></span><span class="op">(</span>score_data <span class="op">=</span> <span class="va">my_scores</span><span class="op">)</span></span></code></pre></div>

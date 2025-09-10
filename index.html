@@ -70,10 +70,10 @@
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://devtools.r-lib.org/" class="external-link">devtools</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"Sidex71/ULM"</span>, build_vignettes <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span></code></pre></div>
-<p>A full guide on ULM workflow can be found on the package website <a href="https://sidex71.github.io/ULM/articles/ULM-vignette.html" class="uri">https://sidex71.github.io/ULM/articles/ULM-vignette.html</a> or on the vignettes page</p>
+<p>A full guide on ULM workflow can be found on the package website <a href="https://sidex71.github.io/ULM/articles/ULM-vignette.html" class="uri">https://sidex71.github.io/ULM/articles/ULM-vignette.html</a> or on the vignettes page by running</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/browseVignettes.html" class="external-link">browseVignettes</a></span><span class="op">(</span><span class="st">'ULM'</span><span class="op">)</span></span>
-<span><span class="co">#&gt; starting httpd help server ... done</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/browseVignettes.html" class="external-link">browseVignettes</a></span><span class="op">(</span><span class="st">'ULM'</span><span class="op">)</span> </span>
+<span><span class="co">#&gt; No vignettes found by browseVignettes("ULM")</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
@@ -99,7 +99,7 @@
 <span><span class="co">#&gt; Calculating cluster Tuft</span></span>
 <span></span>
 <span><span class="co">###score cells and assign labels</span></span>
-<span><span class="va">my_scores</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/GetCellScores.html">GetCellScores</a></span><span class="op">(</span>seurat_obj <span class="op">=</span> <span class="va">int_singData</span>, signatures <span class="op">=</span> <span class="va">int_sig</span>, assay <span class="op">=</span> <span class="st">'RNA'</span>, slot <span class="op">=</span> <span class="st">'data'</span><span class="op">)</span></span>
+<span><span class="va">my_scores</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/GetCellScores.html">GetCellScores</a></span><span class="op">(</span>seurat_obj <span class="op">=</span> <span class="va">int_singData</span>, signatures <span class="op">=</span> <span class="va">int_sig</span>, assay <span class="op">=</span> <span class="st">'RNA'</span>, layer  <span class="op">=</span> <span class="st">'data'</span><span class="op">)</span></span>
 <span><span class="va">my_assign</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/GetCellAssignments.html">GetCellAssignments</a></span><span class="op">(</span>score_data <span class="op">=</span> <span class="va">my_scores</span>, cut_off <span class="op">=</span> <span class="fl">1</span>, p_val <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span>
 <span><span class="va">int_singData</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/AddMetaObject.html">AddMetaObject</a></span><span class="op">(</span><span class="va">int_singData</span>, cell_class_df <span class="op">=</span> <span class="va">my_assign</span><span class="op">)</span></span>
 <span></span>
