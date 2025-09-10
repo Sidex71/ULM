@@ -56,10 +56,12 @@ head(int_sig, 10)
 ```
 The signature table has 3 columns, the source column contains the cell type, the target column contains the genes and the mor column contains the weights.
 
-Next, we score each cell in the scRNseq data for cell signatures by fitting univariate linear models. We will score the signatures on each barcode (cell) in the normalised gene count matrix (found in the slot = data). To use the raw count, set slot = 'count'
+Next, we score each cell in the scRNseq data for cell signatures by fitting univariate linear models. We will score the signatures on each barcode (cell) in the normalised gene count matrix, found in the layer = 'data' (or slot = 'data', for older Seurat versions). To use the raw count, set layer = 'count' (or slot = 'count', for older Seurat versions). 
+
 ```{r}
-my_scores <- GetCellScores(seurat_obj = int_singData, signatures = int_sig, assay = 'RNA', slot = 'data')
+my_scores <- GetCellScores(seurat_obj = int_singData, signatures = int_sig, assay = 'RNA', layer  = 'data')
 ```
+NB: If the Seurat object is from older Seurat versions, layers would be absent, in this case please set layer = NULL, slot = 'data'.
 
 Let us visualize the cell score data frame
 ```{r}
@@ -192,7 +194,7 @@ We then utilize the reference signature to predict multiplets in the query data 
 
 Getting query cell scores
 ```{r}
-my_scores <- GetCellScores(seurat_obj = query_obj, signatures = ref_sig, assay = 'RNA', slot = 'data')
+my_scores <- GetCellScores(seurat_obj = query_obj, signatures = ref_sig, assay = 'RNA', layer = 'data')
 ```
 
 Assigning cell labels
