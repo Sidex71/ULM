@@ -18,9 +18,12 @@ test_that("GetMultiplet correctly extracts predicted multiplets", {
   ## Add assignments to metadata
   new_obj <- AddMetaObject(seurat_obj = int_multData[, 1:300], cell_class_df = my_ass)
   
-  ################ run function to extract multiplets
-  my_mult <- GetMultiplet(seurat_obj = new_obj, minCells = 2)
+  ################ run function to extract multiplets (expect warning about removing missing cells)
   
+  expect_warning(
+    my_mult <- GetMultiplet(seurat_obj = new_obj, minCells = 2),
+    regexp = "Removing .* cells missing data"
+  )
   ### Basic checks on expected outputs
   expect_type(my_mult, "list")                           ## output is a list
   expect_true(all(c("multSummary", "multObj") %in% names(my_mult))) ## the list has the expected 2 components
